@@ -1,0 +1,21 @@
+{
+    "image":"mcr.microsoft.com/devcontainers/universal:2",
+    "forwardPorts": [8000,5173],
+    "portsAttributes": {
+        "8000": {
+            "label": "Laravel App"
+        },
+        "5173": {
+            "label": "React App"
+        }
+    },
+    "remoteEnv": {
+	"PATH": "${containerEnv:PATH}:~/.config/composer/vendor/bin"
+    },
+    "postCreateCommand": "cp .env.example .env && composer install && npm install && php artisan key:generate && php artisan migrate --force && php artisan migrate:fresh --seed",
+    "postAttachCommand": {
+        "server": "gh codespace ports visibility 5173:public -c $CODESPACE_NAME && exit",
+        "vite": "bash .devcontainer/postAttach/vite.sh",
+        "laravel": "bash .devcontainer/postAttach/laravel.sh"
+    }
+}
