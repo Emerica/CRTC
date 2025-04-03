@@ -5,12 +5,13 @@ import typography from '@tailwindcss/typography';
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
+        './node_modules/flowbite/**/*.js', // Add Flowbite
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
+    darkMode: 'class',
     theme: {
         extend: {
             fontFamily: {
@@ -18,6 +19,5 @@ export default {
             },
         },
     },
-
-    plugins: [forms, typography],
+    plugins: [forms, typography, require('flowbite/plugin')], // Add Flowbite plugin
 };
